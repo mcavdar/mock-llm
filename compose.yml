@@ -1,0 +1,9 @@
+services:
+  mock-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mock-openai-api
+    ports:
+      - "8008:8000"
+    restart: unless-stopped
