@@ -12,7 +12,7 @@ class ChatCompletionRequest(BaseModel):
 
 @app.post("/v1/chat/completions")
 async def chat_completions(request: ChatCompletionRequest):
-    user_message = request.messages[-1]["content"]
+    user_message = request
 
     return {
         "id": "mock-chatcmpl-123",
