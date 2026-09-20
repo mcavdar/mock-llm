@@ -1,9 +1,32 @@
 services:
   mock-api:
+    image: ghcr.io/mcavdar/mock-llm:main
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: mock-openai-api-dev
+    container_name: mock-llm
     ports:
       - "8008:8000"
     restart: unless-stopped
+    environment:
+      MOCK_LLM_API_KEY: ${MOCK_LLM_API_KEY:-}
+      MOCK_LLM_DOCS: ${MOCK_LLM_DOCS:-false}
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz')",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
