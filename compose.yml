@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: mock-openai-api
+    container_name: mock-openai-api-dev
     ports:
       - "8008:8000"
     restart: unless-stopped
