@@ -1,31 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
 app = FastAPI()
 
 
-class ChatCompletionRequest(BaseModel):
-    model: str
-    messages: list[dict]
-    temperature: float | None = None
-
-
 @app.post("/v1/chat/completions")
-async def chat_completions(request: ChatCompletionRequest):
-    user_message = request
+async def chat_completions(request: Request):
+    user_message = await request.body()
+    print(user_message)
 
     return {
         "id": "mock-chatcmpl-123",
         "object": "chat.completion",
         "created": 1234567890,
-        "model": request.model,
+        "model": "mock-model",
         "choices": [
             {
                 "index": 0,
                 "message": {
                     "role": "assistant",
                     "content": (
-                        f"[{request.model}] "
+                        f"mock-model"
                         f"Mock response to: {user_message}"
                     ),
                 },

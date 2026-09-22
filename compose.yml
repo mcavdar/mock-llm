@@ -5,5 +5,5 @@ services:
       dockerfile: Dockerfile
     container_name: mock-openai-api-dev
     ports:
-      - "8008:8000"
+      - "192.168.1.160:8008:8000"
     restart: unless-stopped
