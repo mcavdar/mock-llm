@@ -64,6 +64,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            set -Eeuo pipefail
             cd /opt/apps/mock-openai-api
 
             docker compose pull
