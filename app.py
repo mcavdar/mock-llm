@@ -6,7 +6,9 @@ app = FastAPI()
 
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
-    user_message = await request.body()
+    user_message = (await request.body()).decode("utf-8")
+
+
     print(user_message)
 
     return {
