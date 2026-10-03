@@ -4,12 +4,17 @@ import json
 
 app = FastAPI()
 
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "healthy"
+    }
 
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
     user_message = (await request.body()).decode("utf-8")
     payload = json.loads(user_message)
-    print(type(payload))
+    print(payload)
 
     tools = payload.get("tools", [])
     has_search = any(
