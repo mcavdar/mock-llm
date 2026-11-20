@@ -206,4 +206,4 @@ If you find an issue or have an idea for improving the mock API, open an issue o
 
 ## License
 
-See the repository for license information.
+See the repository for license information..
